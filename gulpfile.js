@@ -87,9 +87,17 @@ gulp.task('connect', function () {
   });
 });
 
-gulp.task('watch', function () {
+gulp.task('prod', function () {
+  connect.server({
+    root: [__dirname + '/dist'],
+    port: 9000,
+    livereload: true
+  });
+});
+
+gulp.task('watchprod', function () {
   gulp.watch(paths.js, ['lint']);
-  gulp.watch(['./src/index.html', paths.css, paths.js], ['html']);
+  gulp.watch(['./dist/index.html', paths.css, paths.js], ['html']);
 });
 
 gulp.task('default', ['connect', 'watch']);
