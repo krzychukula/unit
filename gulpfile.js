@@ -16,7 +16,14 @@ var gulp = require('gulp')
 paths = {
   assets: 'src/assets/**/*',
   css:    'src/css/*.css',
-  js:  'src/js/**/*.js',
+  js:  [
+    'src/js/keyboard.js',
+    'src/js/player.js',
+    'src/js/enemy.js',
+    'src/js/game.js',
+    'src/js/render.js',
+    'src/js/start.js'
+  ],
   dist:   './dist/'
 };
 
