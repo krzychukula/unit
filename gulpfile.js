@@ -95,9 +95,9 @@ gulp.task('prod', function () {
   });
 });
 
-gulp.task('watchprod', function () {
+gulp.task('watch', function () {
   gulp.watch(paths.js, ['lint']);
-  gulp.watch(['./dist/index.html', paths.css, paths.js], ['html']);
+  gulp.watch(['./src/index.html', paths.css, paths.js], ['html']);
 });
 
 gulp.task('default', ['connect', 'watch']);
