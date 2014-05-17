@@ -21,7 +21,7 @@
 		c.rect(this.x, this.y,
 			this.width,
 			this.height);
-		c.fillStyle = 'white';
+		c.fillStyle = this.color;
 		c.fill();
 		c.closePath();
 	};
@@ -43,6 +43,12 @@
 
 		this.y += this.vy;
 
+	};
+
+	Player.prototype.collide = function(collide) {
+		if(typeof collide == 'Game'){
+
+		}
 	};
 
 })(window);
