@@ -6,7 +6,7 @@
 		this.y = 0;
 		this.width = 10;
 		this.height = 5;
-		this.speed = 3;
+		this.speed = 7;
 		this.vy = 0;
 		this.vx = 0;
 		this.inAir = true;
