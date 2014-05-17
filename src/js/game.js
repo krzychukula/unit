@@ -35,6 +35,14 @@
 			this.collideWithWorld(this.bullets[i]);
 		};
 
+		for (var i = 0; i < this.enemies.length; i++) {
+			for (var j = i; j < this.bullets.length; j++) {
+				this.collide(this.bullets[j], this.enemies[i]);
+			};
+		};
+
+		this.removeKilled();
+
 		requestAnimationFrame(this.update.bind(this))
 	};
 
@@ -43,7 +51,6 @@
 		if(box.y + box.height > this.height){
 			box.y = this.height - box.height;
 			box.inAir = false;
-
 		}
 		if(box.x < 0) {
 			box.x = 0;
@@ -52,6 +59,20 @@
 			box.x = this.width - box.width;
 			box.collide(this);
 		}
+	};
+
+	Game.prototype.collide = function(a, b) {
+		if(this.checkCollision(a, b)){
+			a.collide(b);
+			b.collide(a);
+		}
+	};
+
+	Game.prototype.checkCollision = function(a, b){
+		return !(a.x + a.width < b.x ||
+				b.x + b.width < a.x ||
+				a.y + a.height < b.y ||
+				b.y + b.height < a.y);
 	};
 
 	Game.prototype.gravity = function(box) {
@@ -63,6 +84,19 @@
 		var b =  new Bullet();
 		b.init(player);
 		this.bullets.push(b);
+	};
+
+	Game.prototype.removeKilled= function() {
+		for (var i = this.bullets.length - 1; i >= 0; i--) {
+			if(this.bullets[i].killed){
+				this.bullets.splice(i, 1);
+			}
+		};
+		for (var i = this.enemies.length - 1; i >= 0; i--) {
+			if(this.enemies[i].killed){
+				this.enemies.splice(i, 1);
+			}
+		};
 	};
 
 

@@ -24,6 +24,8 @@
 	Enemy.prototype.collide = function(collide) {
 		if(Game.prototype.isPrototypeOf(collide)){
 			this.speed *= -1;
+		}else if(Bullet.prototype.isPrototypeOf(collide)){
+			this.killed = true;
 		}
 	};
 })(window);

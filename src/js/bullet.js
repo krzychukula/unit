@@ -30,9 +30,9 @@
 		this.x += this.vx;
 	};
 	Bullet.prototype.collide = function(collide) {
-		if(Game.prototype.isPrototypeOf(collide)){
-			this.killed = true;
-		}
+
+		this.killed = true;
+
 	};
 
 	Bullet.prototype.draw = function(c) {
