@@ -18,6 +18,7 @@ paths = {
   css:    'src/css/*.css',
   js:  [
     'src/js/keyboard.js',
+    'src/js/bullet.js',
     'src/js/player.js',
     'src/js/enemy.js',
     'src/js/game.js',

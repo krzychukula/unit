@@ -1,19 +1,26 @@
 (function playerModule (window) {
 	window.Player = Player;
 
-	function Player (keybard) {
+	function Player (game) {
 		this.x = 20;
 		this.y = 20;
 		this.width = 20;
 		this.height = 20;
 		this.color = 'white';
-		this.keybard = keybard;
+		if(game){
+			this.game = game;
+			this.keyboard = game.keyboard;
+		}
 		this.friction = 0.7;
 		this.speed = 7;
 		this.jump = -18;
 		this.vy = 0;
 		this.vx = 0;
 		this.inAir = false;
+		this.directionRight = true;
+		this.killed = false;
+		this.lastFire = Date.now()
+		this.reloadTime = 400;
 	}
 
 	Player.prototype.draw = function(c) {
@@ -27,18 +34,28 @@
 	};
 
 	Player.prototype.update = function() {
-		if(this.keybard.right){
+		if(this.keyboard.right){
 			this.vx += this.speed;
+			this.directionRight = true;
 		}
-		if(this.keybard.left){
+		if(this.keyboard.left){
 			this.vx -= this.speed;
+			this.directionRight = false;
 		}
 		this.vx *= this.friction;
 		this.x += this.vx;
 
-		if(this.keybard.up && !this.inAir){
+		if(this.keyboard.up && !this.inAir){
 			this.vy = this.jump;
 			this.inAir = true;
+		}
+
+		if(this.keyboard.space){
+			if(Date.now() - this.lastFire > this.reloadTime){
+				this.game.addBullet(this);
+				this.lastFire = Date.now();
+			}
+
 		}
 
 		this.y += this.vy;

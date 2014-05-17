@@ -2,15 +2,18 @@
 (function gamemodule (window) {
 	window.Game = Game;
 
-	function Game (canvas, keybard) {
+	function Game (canvas, keyboard) {
 		this.canvas = canvas;
-		this.keybard = keybard;
+		this.keyboard = keyboard;
+		this.bullets = [];
+		this.player = null;
+		this.enemies = [];
 	}
 
 	Game.prototype.init = function(width, height) {
 		this.width = width;
 		this.height = height;
-		this.player = new Player(this.keybard);
+		this.player = new Player(this);
 		this.player.x = 50;
 		this.player.y = 50;
 		this.enemies = [new Enemy(width/4), new Enemy(width/2)]
@@ -26,6 +29,10 @@
 			this.gravity(this.enemies[i]);
 			this.enemies[i].update();
 			this.collideWithWorld(this.enemies[i]);
+		};
+		for (var i = this.bullets.length - 1; i >= 0; i--) {
+			this.bullets[i].update();
+			this.collideWithWorld(this.bullets[i]);
 		};
 
 		requestAnimationFrame(this.update.bind(this))
@@ -52,7 +59,11 @@
 	};
 
 
-
+	Game.prototype.addBullet = function(player) {
+		var b =  new Bullet();
+		b.init(player);
+		this.bullets.push(b);
+	};
 
 
 
