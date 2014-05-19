@@ -7,7 +7,7 @@
 		this.keyboard = keyboard;
 		this.bullets = [];
 		this.player = null;
-		this.enemies = [];
+		this.enemies = new Enemies();
 	}
 
 	Game.prototype.init = function(width, height) {
@@ -16,7 +16,8 @@
 		this.player = new Player(this);
 		this.player.x = 50;
 		this.player.y = 50;
-		this.enemies = [new Enemy(width/4), new Enemy(width/2)]
+		this.enemies.addEnemy(width/4);
+		this.enemies.addEnemy(width/2);
 		requestAnimationFrame(this.update.bind(this));
 	};
 
@@ -25,11 +26,11 @@
 		this.player.update();
 		this.collideWithWorld(this.player);
 
-		for (var i = this.enemies.length - 1; i >= 0; i--) {
-			this.gravity(this.enemies[i]);
-			this.enemies[i].update();
-			this.collideWithWorld(this.enemies[i]);
-		};
+		this.enemies.update(function(enemy){
+			this.gravity(enemy);
+			this.collideWithWorld(enemy);
+		}.bind(this))
+
 		for (var i = this.bullets.length - 1; i >= 0; i--) {
 			this.bullets[i].update();
 			this.collideWithWorld(this.bullets[i]);
@@ -38,11 +39,15 @@
 		this.collideGroups(this.enemies, this.bullets);
 
 		this.removeKilled();
+		this.enemies.removeKilled();
 
 		requestAnimationFrame(this.update.bind(this))
 	};
 
 	Game.prototype.collideGroups = function(groupA, groupB) {
+		//TODO: fixme when there will be only collections
+		if(groupA.collection) groupA = groupA.collection;
+		if(groupB.collection) groupB = groupB.collection;
 		for (var i = 0; i < groupA.length; i++) {
 			for (var j = i; j < groupB.length; j++) {
 				this.collide(groupB[j], groupA[i]);
@@ -94,11 +99,6 @@
 		for (var i = this.bullets.length - 1; i >= 0; i--) {
 			if(this.bullets[i].killed){
 				this.bullets.splice(i, 1);
-			}
-		};
-		for (var i = this.enemies.length - 1; i >= 0; i--) {
-			if(this.enemies[i].killed){
-				this.enemies.splice(i, 1);
 			}
 		};
 	};

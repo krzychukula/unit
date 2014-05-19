@@ -19,9 +19,9 @@
 	Render.prototype.draw = function() {
 		this.canvas.width = this.width;
 		this.game.player.draw(this.c);
-		for (var i = this.game.enemies.length - 1; i >= 0; i--) {
-			this.game.enemies[i].draw(this.c);
-		};
+
+		this.game.enemies.draw(this.c);
+
 		for (var i = this.game.bullets.length - 1; i >= 0; i--) {
 			this.game.bullets[i].draw(this.c);
 		};

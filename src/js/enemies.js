@@ -26,4 +26,10 @@
 		};
 	};
 
+	Enemies.prototype.draw = function(c) {
+		for (var i = this.collection.length - 1; i >= 0; i--) {
+			this.collection[i].draw(c);
+		};
+	};
+
 })(window);
