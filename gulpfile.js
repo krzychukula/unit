@@ -20,6 +20,7 @@ paths = {
     'src/js/keyboard.js',
     'src/js/bullet.js',
     'src/js/player.js',
+    'src/js/enemies.js',
     'src/js/enemy.js',
     'src/js/game.js',
     'src/js/render.js',
