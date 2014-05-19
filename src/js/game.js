@@ -35,15 +35,19 @@
 			this.collideWithWorld(this.bullets[i]);
 		};
 
-		for (var i = 0; i < this.enemies.length; i++) {
-			for (var j = i; j < this.bullets.length; j++) {
-				this.collide(this.bullets[j], this.enemies[i]);
-			};
-		};
+		this.collideGroups(this.enemies, this.bullets);
 
 		this.removeKilled();
 
 		requestAnimationFrame(this.update.bind(this))
+	};
+
+	Game.prototype.collideGroups = function(groupA, groupB) {
+		for (var i = 0; i < groupA.length; i++) {
+			for (var j = i; j < groupB.length; j++) {
+				this.collide(groupB[j], groupA[i]);
+			};
+		};
 	};
 
 
