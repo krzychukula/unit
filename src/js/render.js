@@ -21,10 +21,7 @@
 		this.game.player.draw(this.c);
 
 		this.game.enemies.draw(this.c);
-
-		for (var i = this.game.bullets.length - 1; i >= 0; i--) {
-			this.game.bullets[i].draw(this.c);
-		};
+		this.game.bullets.draw(this.c);
 
 		requestAnimationFrame(this.draw.bind(this))
 	};

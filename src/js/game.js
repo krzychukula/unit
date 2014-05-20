@@ -5,7 +5,7 @@
 	function Game (canvas, keyboard) {
 		this.canvas = canvas;
 		this.keyboard = keyboard;
-		this.bullets = [];
+		this.bullets = new Group(Bullet);
 		this.player = null;
 		this.enemies = new Group(Enemy);
 	}
@@ -29,28 +29,25 @@
 		this.enemies.update(function(enemy){
 			this.gravity(enemy);
 			this.collideWithWorld(enemy);
-		}.bind(this))
+		}.bind(this));
 
-		for (var i = this.bullets.length - 1; i >= 0; i--) {
-			this.bullets[i].update();
-			this.collideWithWorld(this.bullets[i]);
-		};
+		this.bullets.update(function(bullet){
+			this.collideWithWorld(bullet);
+		}.bind(this));
 
 		this.collideGroups(this.enemies, this.bullets);
 
-		this.removeKilled();
+		this.bullets.removeKilled();
 		this.enemies.removeKilled();
 
 		requestAnimationFrame(this.update.bind(this))
 	};
 
 	Game.prototype.collideGroups = function(groupA, groupB) {
-		//TODO: fixme when there will be only collections
-		if(groupA.collection) groupA = groupA.collection;
-		if(groupB.collection) groupB = groupB.collection;
-		for (var i = 0; i < groupA.length; i++) {
-			for (var j = i; j < groupB.length; j++) {
-				this.collide(groupB[j], groupA[i]);
+		//TODO: think about moving it to Group.js
+		for (var i = 0; i < groupA.collection.length; i++) {
+			for (var j = i; j < groupB.collection.length; j++) {
+				this.collide(groupB.collection[j], groupA.collection[i]);
 			};
 		};
 	};
@@ -90,19 +87,8 @@
 
 
 	Game.prototype.addBullet = function(player) {
-		var b =  new Bullet();
-		b.init(player);
-		this.bullets.push(b);
+		this.bullets.add(player);
 	};
-
-	Game.prototype.removeKilled= function() {
-		for (var i = this.bullets.length - 1; i >= 0; i--) {
-			if(this.bullets[i].killed){
-				this.bullets.splice(i, 1);
-			}
-		};
-	};
-
 
 
 })(window);
