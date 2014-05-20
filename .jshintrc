@@ -19,6 +19,13 @@
   "sub": true,
   "debug": true,
   "globals": {
-    "Phaser": false
+    "Keyboard": false,
+    "Game": false,
+    "Render": false,
+    "Group": false,
+    "Bullet": false,
+    "Player": false,
+    "Enemy": false,
+    "requestAnimationFrame": false
   }
 }

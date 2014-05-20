@@ -5,7 +5,7 @@
 		Player.apply(this);
 		this.inAir = true;
 		this.speed = 1;
-		this.color = "#E64C66";
+		this.color = '#E64C66';
 	}
 
 	Enemy.prototype = new Player();

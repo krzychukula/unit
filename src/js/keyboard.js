@@ -1,7 +1,8 @@
-(function keybardmodule (window) {
-	window.Keybard = Keybard;
+/* exported Keyboard */
+(function keyboardmodule (window) {
+	window.Keyboard = Keyboard;
 
-	function Keybard () {
+	function Keyboard () {
 		this.up = false;
 		this.left = false;
 		this.right = false;
@@ -9,12 +10,12 @@
 		this.space = false;
 	}
 
-	Keybard.prototype.init = function() {
-		window.addEventListener("keydown", this.keyDown.bind(this), false);
-		window.addEventListener("keyup",this.keyUp.bind(this), false);
+	Keyboard.prototype.init = function() {
+		window.addEventListener('keydown', this.keyDown.bind(this), false);
+		window.addEventListener('keyup',this.keyUp.bind(this), false);
 	};
 
-	Keybard.prototype.dealWithKeybard = function(e, value) {
+	Keyboard.prototype.dealWithKeyboard = function(e, value) {
 		switch(e.keyCode) {
 			case 37:
 			// left key
@@ -38,10 +39,10 @@
 			break;
 		}
 	};
-	Keybard.prototype.keyDown = function(e) {
-		this.dealWithKeybard(e, true);
+	Keyboard.prototype.keyDown = function(e) {
+		this.dealWithKeyboard(e, true);
 	};
-	Keybard.prototype.keyUp = function(e) {
-		this.dealWithKeybard(e, false);
+	Keyboard.prototype.keyUp = function(e) {
+		this.dealWithKeyboard(e, false);
 	};
 })(window);

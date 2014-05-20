@@ -40,7 +40,7 @@
 		this.bullets.removeKilled();
 		this.enemies.removeKilled();
 
-		requestAnimationFrame(this.update.bind(this))
+		requestAnimationFrame(this.update.bind(this));
 	};
 
 	Game.prototype.collideGroups = function(groupA, groupB) {
@@ -48,8 +48,8 @@
 		for (var i = 0; i < groupA.collection.length; i++) {
 			for (var j = i; j < groupB.collection.length; j++) {
 				this.collide(groupB.collection[j], groupA.collection[i]);
-			};
-		};
+			}
+		}
 	};
 
 

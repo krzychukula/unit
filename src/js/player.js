@@ -19,15 +19,13 @@
 		this.inAir = false;
 		this.directionRight = true;
 		this.killed = false;
-		this.lastFire = Date.now()
+		this.lastFire = Date.now();
 		this.reloadTime = 400;
 	}
 
 	Player.prototype.draw = function(c) {
 		c.beginPath();
-		c.rect(this.x, this.y,
-			this.width,
-			this.height);
+		c.rect(this.x, this.y, this.width, this.height);
 		c.fillStyle = this.color;
 		c.fill();
 		c.closePath();
@@ -62,10 +60,8 @@
 
 	};
 
-	Player.prototype.collide = function(collide) {
-		if(typeof collide == 'Game'){
-
-		}
+	Player.prototype.collide = function(/* collide */) {
+		//Game.collideWithWorld is handling most of current work
 	};
 
 })(window);

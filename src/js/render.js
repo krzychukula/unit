@@ -23,6 +23,6 @@
 		this.game.enemies.draw(this.c);
 		this.game.bullets.draw(this.c);
 
-		requestAnimationFrame(this.draw.bind(this))
+		requestAnimationFrame(this.draw.bind(this));
 	};
 })(window);
