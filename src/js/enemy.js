@@ -1,9 +1,8 @@
 (function enemymodule (window) {
 	window.Enemy = Enemy;
 
-	function Enemy (x) {
+	function Enemy () {
 		Player.apply(this);
-		this.x = x;
 		this.inAir = true;
 		this.speed = 1;
 		this.color = "#E64C66";
@@ -11,6 +10,10 @@
 
 	Enemy.prototype = new Player();
 	Enemy.prototype.constructor = Enemy;
+
+	Enemy.prototype.init = function(x) {
+		this.x = x;
+	};
 
 	Enemy.prototype.update = function() {
 		if(!this.inAir){

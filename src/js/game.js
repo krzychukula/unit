@@ -7,7 +7,7 @@
 		this.keyboard = keyboard;
 		this.bullets = [];
 		this.player = null;
-		this.enemies = new Enemies();
+		this.enemies = new Group(Enemy);
 	}
 
 	Game.prototype.init = function(width, height) {
@@ -16,8 +16,8 @@
 		this.player = new Player(this);
 		this.player.x = 50;
 		this.player.y = 50;
-		this.enemies.addEnemy(width/4);
-		this.enemies.addEnemy(width/2);
+		this.enemies.add(width / 4);
+		this.enemies.add(width / 3 );
 		requestAnimationFrame(this.update.bind(this));
 	};
 

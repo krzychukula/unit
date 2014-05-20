@@ -1,15 +1,18 @@
-(function enemiescollectionmodule (window) {
-	window.Enemies = Enemies;
+(function groupmodule (window) {
+	window.Group = Group;
 
-	function Enemies (Enemy) {
+	function Group (newObjConstructor) {
+		this.newObjConstructor = newObjConstructor;
 		this.collection = [];
 	}
 
-	Enemies.prototype.addEnemy = function(x) {
-		this.collection.push(new Enemy(x));
+	Group.prototype.add = function() {
+		var instance = new this.newObjConstructor();
+		instance.init.apply(instance, arguments);
+		this.collection.push(instance);
 	};
 
-	Enemies.prototype.update = function(callback) {
+	Group.prototype.update = function(callback) {
 		for (var i = this.collection.length - 1; i >= 0; i--) {
 			//this.gravity(this.collection[i]);
 			this.collection[i].update();
@@ -18,7 +21,7 @@
 		};
 	};
 
-	Enemies.prototype.removeKilled = function() {
+	Group.prototype.removeKilled = function() {
 		for (var i = this.collection.length - 1; i >= 0; i--) {
 			if(this.collection[i].killed){
 				this.collection.splice(i, 1);
@@ -26,7 +29,7 @@
 		};
 	};
 
-	Enemies.prototype.draw = function(c) {
+	Group.prototype.draw = function(c) {
 		for (var i = this.collection.length - 1; i >= 0; i--) {
 			this.collection[i].draw(c);
 		};
